@@ -22,37 +22,51 @@ import {
   Layout,
   Info,
   Menu,
-  X
+  X,
+  Github,
+  ExternalLink
 } from 'lucide-react';
 
-// Componente de Tarjeta con efecto Flip adaptado a Touch
+/**
+ * INSTRUCCIONES PARA DESPLEGAR EN GITHUB:
+ * 1. Crea un proyecto con Vite: `npm create vite@latest mi-proyecto -- --template react`
+ * 2. Instala dependencias: `npm install lucide-react clsx tailwind-merge`
+ * 3. Copia este código en `src/App.jsx`.
+ * 4. Configura Tailwind CSS en tu proyecto.
+ * 5. Para GitHub Pages: Instala `gh-pages` y añade el script de "deploy" en package.json.
+ */
+
+// Componente de Tarjeta con efecto Flip adaptado a Touch y Desktop
 const FlipCard = ({ icon, label, text, summary }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
     <div 
-      className="relative h-72 w-full perspective-1000 cursor-pointer mb-4"
+      className="relative h-72 w-full perspective-1000 cursor-pointer mb-4 group"
       onClick={() => setIsFlipped(!isFlipped)}
     >
-      <div className={`relative w-full h-full transition-all duration-500 preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
+      <div className={`relative w-full h-full transition-all duration-700 preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
         
         {/* Cara Frontal */}
-        <div className="absolute inset-0 backface-hidden p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col active:bg-emerald-50">
-          <div className="mb-4 text-emerald-600">{icon}</div>
+        <div className="absolute inset-0 backface-hidden p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col hover:border-emerald-500 transition-colors">
+          <div className="mb-4 text-emerald-600 flex justify-between items-start">
+            {icon}
+            <Info className="w-4 h-4 text-slate-300 group-hover:text-emerald-500 transition-colors" />
+          </div>
           <h3 className="text-lg font-bold mb-2 text-slate-800">{label}</h3>
           <p className="text-slate-600 text-sm leading-relaxed">{text}</p>
-          <div className="mt-auto flex items-center gap-2 text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
-            <Info className="w-3 h-3" /> Toca para ver resumen
+          <div className="mt-auto text-[10px] font-bold text-slate-400 uppercase tracking-widest group-hover:text-emerald-600 transition-colors">
+            Toca para detalles
           </div>
         </div>
 
         {/* Cara Trasera */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180 p-6 rounded-2xl bg-emerald-700 text-white shadow-lg flex flex-col justify-center items-center text-center">
-          <h3 className="text-sm font-bold mb-3 border-b border-emerald-500 pb-2 w-full uppercase tracking-widest">Estrategia</h3>
-          <p className="text-emerald-50 text-sm font-medium leading-relaxed">
-            {summary}
+        <div className="absolute inset-0 backface-hidden rotate-y-180 p-6 rounded-2xl bg-emerald-700 text-white shadow-xl flex flex-col justify-center items-center text-center">
+          <h3 className="text-sm font-bold mb-3 border-b border-emerald-500 pb-2 w-full uppercase tracking-widest">Línea Estratégica</h3>
+          <p className="text-emerald-50 text-sm font-medium leading-relaxed italic">
+            "{summary}"
           </p>
-          <div className="mt-4 text-[10px] font-bold uppercase tracking-widest opacity-60">
+          <div className="mt-6 text-[10px] font-bold uppercase tracking-widest opacity-60">
             Toca para volver
           </div>
         </div>
@@ -72,23 +86,23 @@ const App = () => {
       id: 'cover',
       type: 'hero',
       title: "CEFP 2026-2027",
-      subtitle: "Estrategia de Mejora Continua",
-      description: "Hacia la modernización técnica de la Cámara de Diputados.",
-      tag: "LXVI Legislatura",
+      subtitle: "Estrategia de Transformación Técnica",
+      description: "Propuesta integral para la modernización del Centro de Estudios de las Finanzas Públicas.",
+      tag: "LXVI Legislatura · GitHub Edition",
       icon: <Rocket className="w-12 h-12 text-emerald-600" />
     },
     {
       id: 'agenda',
       type: 'list',
-      title: "Contenido",
-      subtitle: "Plan de Acción",
+      title: "Plan de Acción",
+      subtitle: "Contenido del Repositorio",
       items: [
-        "1. Diagnóstico Actual",
-        "2. Crisis Operativa",
-        "3. Ejes de Mejora",
-        "4. Ciencia de Datos",
-        "5. Capital Humano",
-        "6. Implementación"
+        "Diagnóstico de la Situación Actual",
+        "Análisis de la Crisis Operativa",
+        "Ejes de Mejora Tecnológica",
+        "Estrategia de Ciencia de Datos",
+        "Reingeniería de Capital Humano",
+        "Cronograma de Implementación"
       ]
     },
     {
@@ -97,199 +111,199 @@ const App = () => {
       title: "1. Ambigüedad",
       subtitle: "Estructura y Objetivos",
       content: [
-        { icon: <Search />, label: "Objetivos", text: "Ambigüedad legal que genera discrecionalidad.", summary: "Redefinir alcances técnicos normativos." },
-        { icon: <Network />, label: "Duplicidad", text: "Mismo análisis que CESOP con otros datos.", summary: "Unificar fuentes con otros centros." },
-        { icon: <ShieldCheck />, label: "Gaps", text: "Falta de técnica legislativa básica.", summary: "Capacitación jurídica obligatoria." }
+        { icon: <Search />, label: "Objetivos", text: "Ambigüedad legal que genera discrecionalidad excesiva.", summary: "Redefinir alcances técnicos normativos para mayor certeza jurídica." },
+        { icon: <Network />, label: "Duplicidad", text: "Mismo análisis que otros centros pero con datos distintos.", summary: "Unificar fuentes y metodologías con CESOP y otros órganos." },
+        { icon: <ShieldCheck />, label: "Gaps", text: "Falta de técnica legislativa básica en el equipo.", summary: "Programa intensivo de capacitación técnica-jurídica obligatoria." }
       ]
     },
     {
       id: 'diag-productos',
       type: 'content',
-      title: "2. Productos",
-      subtitle: "Calidad Técnica",
+      title: "2. Calidad Técnica",
+      subtitle: "Inconsistencia de Productos",
       content: [
-        { icon: <FileText />, label: "Calidad", text: "Variación drástica entre áreas técnicas.", summary: "Implementar plantillas de revisión par." },
-        { icon: <Layout />, label: "Visual", text: "Gráficos sin valor de síntesis real.", summary: "Uso de visualización dinámica de datos." },
-        { icon: <Target />, label: "Alcance", text: "Tareas ajenas a las facultades normativas.", summary: "Auditoría de pertinencia de productos." }
+        { icon: <FileText />, label: "Estandarización", text: "Variación crítica en la calidad entre áreas técnicas.", summary: "Implementar revisión por pares y plantillas de control de calidad." },
+        { icon: <Layout />, label: "Síntesis Visual", text: "Gráficos que no logran explicar fenómenos complejos.", summary: "Adopción de herramientas modernas de Business Intelligence." },
+        { icon: <Target />, label: "Pertinencia", text: "Tareas ajenas a las facultades del Centro.", summary: "Eliminar productos que no aporten valor al ciclo legislativo." }
       ]
     },
     {
       id: 'ipp-crisis',
       type: 'content',
       title: "3. Crisis en IPP",
-      subtitle: "Cuello de botella técnico",
+      subtitle: "Cuello de botella operativo",
       content: [
-        { icon: <AlertTriangle />, label: "Estándar", text: "No hay criterios técnicos compartidos.", summary: "Manual técnico de IPP estandarizado." },
-        { icon: <LineChart />, label: "Precisión", text: "Uso de métodos heurísticos subjetivos.", summary: "Modelos econométricos automáticos." },
-        { icon: <Clock />, label: "Histórico", text: "Respuestas incoherentes entre años.", summary: "Base de datos histórica de impactos." }
+        { icon: <AlertTriangle />, label: "Metodología", text: "Ausencia de criterios técnicos compartidos.", summary: "Manual técnico de IPP con validación matemática obligatoria." },
+        { icon: <LineChart />, label: "Exactitud", text: "Uso de métodos heurísticos altamente subjetivos.", summary: "Migración a modelos econométricos estandarizados." },
+        { icon: <Clock />, label: "Consistencia", text: "Resultados contradictorios en iniciativas similares.", summary: "Base de datos histórica para garantizar coherencia técnica." }
       ]
     },
     {
       id: 'ipp-stats',
       type: 'metric',
       title: "Saturación IPP",
-      subtitle: "Análisis 2016-2024",
+      subtitle: "Carga de Trabajo 2016-2024",
       metric: "60.1%",
-      desc: "De las solicitudes procesadas no tienen impacto presupuestario, pero frenan la operación.",
+      desc: "De las solicitudes procesadas no tienen impacto presupuestario real, drenando recursos del Centro.",
       color: "text-amber-600"
     },
     {
       id: 'response-time',
       type: 'metric',
-      title: "Tiempos Críticos",
-      subtitle: "Relevancia Legislativa",
+      title: "Tiempos de Respuesta",
+      subtitle: "Pérdida de Utilidad",
       metric: "+80 días",
-      desc: "Las respuestas tardías pierden utilidad en el ciclo parlamentario.",
+      desc: "El retraso promedio hace que los productos lleguen después de los debates legislativos.",
       color: "text-red-600"
     },
     {
       id: 'data-silos',
       type: 'content',
-      title: "4. Información",
-      subtitle: "Infraestructura de Datos",
+      title: "4. Infraestructura",
+      subtitle: "Gestión de Datos",
       content: [
-        { icon: <Database />, label: "Silos", text: "Áreas cerradas que impiden revisión par.", summary: "DataLake centralizado institucional." },
-        { icon: <Cpu />, label: "Manual", text: "80% de tareas son mecánicas/repetitivas.", summary: "Scripts de extracción automática de datos." },
-        { icon: <Zap />, label: "Carga", text: "Tareas de 15min toman hoy 7 horas.", summary: "Automatización con IA generativa." }
+        { icon: <Database />, label: "Silos", text: "Datos cerrados que impiden la transparencia interna.", summary: "Implementación de un DataLake institucional centralizado." },
+        { icon: <Cpu />, label: "Procesos", text: "80% de las tareas son mecánicas y repetitivas.", summary: "Automatización vía scripts y procesos de ETL modernos." },
+        { icon: <Zap />, label: "Eficiencia", text: "Tareas de 15min hoy toman hasta 7 horas.", summary: "Despliegue de IA para procesamiento de lenguaje natural." }
       ]
     },
     {
       id: 'leadership',
       type: 'content',
       title: "5. Liderazgo",
-      subtitle: "Cultura Organizacional",
+      subtitle: "Clima Organizacional",
       content: [
-        { icon: <Users />, label: "Evaluación", text: "Unilateral sin feedback ascendente.", summary: "Modelo de evaluación 360° inmediato." },
-        { icon: <Clock />, label: "Revisiones", text: "Representan el 65% del tiempo de entrega.", summary: "Plataforma de aprobación con alertas." },
-        { icon: <Briefcase />, label: "Vínculo", text: "Desconexión con el trabajo de Comisiones.", summary: "Enlaces técnicos por comisión legislativa." }
+        { icon: <Users />, label: "Evaluación", text: "Cultura piramidal sin retroalimentación inversa.", summary: "Nuevo modelo de evaluación 360° para detectar fallas de gestión." },
+        { icon: <Clock />, label: "Flujos", text: "Revisiones burocráticas consumen el 65% del tiempo.", summary: "Flujos de aprobación ágiles con firmas digitales." },
+        { icon: <Briefcase />, label: "Vínculo", text: "Desconexión con las prioridades de Comisiones.", summary: "Enlaces técnicos permanentes asignados a cada comisión." }
       ]
     },
     {
       id: 'vision',
       type: 'hero',
-      title: "Estrategia",
-      subtitle: "Rumbo al 2027",
-      description: "Menos desgaste manual, más inteligencia técnica.",
-      tag: "SOLUCIÓN",
+      title: "Hoja de Ruta",
+      subtitle: "Objetivos Estratégicos",
+      description: "Transformar la burocracia manual en inteligencia técnica automatizada.",
+      tag: "ESTRATEGIA",
       icon: <Target className="w-12 h-12 text-blue-600" />
     },
     {
       id: 'pillar-metodologia',
       type: 'pillars',
-      title: "Eje A: Calidad",
-      subtitle: "Estandarización Obligatoria",
+      title: "Calidad Técnica",
+      subtitle: "Estandarización",
       items: [
-        { title: "Manuales", desc: "Estilo y redacción técnica uniforme.", summary: "Eliminar la heterogeneidad visual." },
-        { title: "IPP", desc: "Protocolo matemático validado.", summary: "Garantizar certidumbre técnica." }
+        { title: "Manuales", desc: "Estilo y redacción técnica uniforme.", summary: "Garantizar que todo producto tenga el sello de calidad CEFP." },
+        { title: "IPP", desc: "Protocolo matemático validado.", summary: "Dar certeza absoluta a los legisladores sobre el costo de leyes." }
       ]
     },
     {
       id: 'pillar-tecnologia',
       type: 'pillars',
-      title: "Eje B: Tecnología",
-      subtitle: "Base de la Eficiencia",
+      title: "Tecnología",
+      subtitle: "Modernización",
       items: [
-        { title: "Data Science", desc: "Unidad central de limpieza de datos.", summary: "Datos únicos PEF/LIF validados." },
-        { title: "Scripts", desc: "Automatización de indicadores diarios.", summary: "Eliminar el procesamiento manual." }
+        { title: "Data Science", desc: "Unidad central de inteligencia de datos.", summary: "Limpieza y análisis predictivo de finanzas públicas." },
+        { title: "SADE", desc: "Sistema de Apoyo Legislativo Digital.", summary: "Automatización total de la consulta ciudadana y parlamentaria." }
       ]
     },
     {
       id: 'it-infrastructure',
       type: 'content',
-      title: "Digitalización",
-      subtitle: "El nuevo SADE",
+      title: "Ecosistema Digital",
+      subtitle: "Presencia y Herramientas",
       content: [
-        { icon: <Globe />, label: "Web", text: "Rediseño funcional y estético.", summary: "Repositorio semántico inteligente." },
-        { icon: <Cpu />, label: "SADE", text: "Núcleo de apoyo parlamentario.", summary: "Conexión directa con Comisiones." },
-        { icon: <Zap />, label: "Difusión", text: "Redes vinculadas a técnica.", summary: "Infografía dinámica para legisladores." }
+        { icon: <Globe />, label: "Web", text: "Portal funcional y repositorio semántico.", summary: "UX centrada en asesores y legisladores para acceso rápido." },
+        { icon: <Cpu />, label: "Interoperabilidad", text: "Conexión con Gaceta y otros órganos.", summary: "Eliminar el envío manual de documentos PDF." },
+        { icon: <Zap />, label: "Redes", text: "Difusión de datos técnicos a la sociedad.", summary: "Posicionar al CEFP como autoridad técnica en finanzas." }
       ]
     },
     {
       id: 'pillar-talento',
       type: 'pillars',
-      title: "Eje C: Talento",
-      subtitle: "Capital Humano",
+      title: "Capital Humano",
+      subtitle: "Talento y Carrera",
       items: [
-        { title: "Autoria", desc: "Reconocimiento del investigador.", summary: "Motivación y responsabilidad técnica." },
-        { title: "Eval 360", desc: "Feedback hacia directivos.", summary: "Mejorar la agilidad en revisiones." }
+        { title: "Firma", desc: "Reconocimiento del autor del estudio.", summary: "Incentivar la excelencia y responsabilidad profesional." },
+        { title: "Formación", desc: "Plan de carrera técnica legislativa.", summary: "Retención de talento especializado y alta dirección." }
       ]
     },
     {
       id: 'capacitacion',
       type: 'list',
-      title: "Capacitación",
-      subtitle: "Habilidades 2026",
+      title: "Ejes de Capacitación",
+      subtitle: "Skills LXVI Legislatura",
       items: [
-        "Técnica Legislativa",
-        "Análisis de Big Data Fiscal",
-        "IA aplicada a la investigación",
-        "Dinámica de Comisiones"
+        "Técnica Legislativa y Presupuestaria",
+        "Análisis Estadístico con R y Python",
+        "Herramientas de IA para Investigación",
+        "Relaciones con Instituciones Internacionales"
       ]
     },
     {
       id: 'pillar-vinculacion',
       type: 'content',
-      title: "Eje D: Global",
-      subtitle: "Proyección Internacional",
+      title: "Vínculo Global",
+      subtitle: "Proyección Exterior",
       content: [
-        { icon: <Globe />, label: "OCDE", text: "Revisión por pares internacionales.", summary: "Garantía de estándares globales." },
-        { icon: <Users />, label: "CBO", text: "Intercambio con EE.UU./Canadá.", summary: "Adoptar modelos fiscales modernos." },
-        { icon: <ShieldCheck />, label: "IFI", text: "Certificación institucional.", summary: "Posicionar al CEFP como IFI líder." }
+        { icon: <Globe />, label: "OCDE / FMI", text: "Revisiones por pares y mejores prácticas.", summary: "Alinear al CEFP con estándares internacionales de transparencia." },
+        { icon: <Users />, label: "PBOs", text: "Relación con Oficinas de Presupuesto.", summary: "Aprender de modelos de éxito como el CBO de EE.UU." },
+        { icon: <ShieldCheck />, label: "IFI", text: "Certificación como institución independiente.", summary: "Consolidar la autonomía técnica del Centro." }
       ]
     },
     {
       id: 'roadmap-short',
       type: 'roadmap',
-      title: "Corto Plazo",
-      subtitle: "0 - 6 meses",
+      title: "Fase 1: Estabilidad",
+      subtitle: "Meses 1 - 6",
       items: [
-        "Manual de Identidad",
-        "Filtro IPP Automatizado",
-        "Reconocimiento Autoral",
-        "Capacitación Express"
+        "Publicación del Manual de Identidad",
+        "Filtro Automático de Impacto IPP",
+        "Sistema de Firma de Autoría",
+        "Talleres de Técnica Legislativa"
       ],
       color: "bg-emerald-500"
     },
     {
       id: 'roadmap-medium',
       type: 'roadmap',
-      title: "Mediano Plazo",
-      subtitle: "6 - 18 meses",
+      title: "Fase 2: Modernización",
+      subtitle: "Meses 6 - 18",
       items: [
-        "Unidad Ciencia de Datos",
-        "SADE Automatizado",
-        "Reingeniería Organigrama",
-        "Nuevo Portal Web"
+        "Dirección de Ciencia de Datos",
+        "Automatización de Coyuntura (Scripts)",
+        "Relanzamiento del SADE",
+        "Estrategia Digital Nacional"
       ],
       color: "bg-blue-500"
     },
     {
       id: 'efficiency-vs-budget',
       type: 'split',
-      title: "Eficiencia",
-      subtitle: "Cambio de Paradigma",
-      left: { title: "Tradicional", desc: "Desgaste en procesos manuales lentos." },
-      right: { title: "Nuevo", desc: "Inteligencia técnica automatizada." }
+      title: "Visión Presupuestaria",
+      subtitle: "Eficiencia Operativa",
+      left: { title: "Modelo Tradicional", desc: "Altos costos en horas-hombre para tareas mecánicas. Resultados tardíos." },
+      right: { title: "Modelo de Inteligencia", desc: "Inversión en tecnología que libera tiempo para el análisis estratégico." }
     },
     {
       id: 'conclusion',
       type: 'hero',
-      title: "Conclusión",
-      subtitle: "Un Nuevo CEFP",
-      description: "Utilidad, oportunidad y rigor científico para México.",
-      tag: "LXVI LEGISLATURA",
+      title: "El Nuevo CEFP",
+      subtitle: "Utilidad · Oportunidad · Rigor",
+      description: "Recuperando el papel científico del Centro para fortalecer el Poder Legislativo.",
+      tag: "PROYECTO LXVI",
       icon: <CheckCircle2 className="w-12 h-12 text-emerald-600" />
     },
     {
       id: 'final',
       type: 'list',
-      title: "Next Steps",
-      subtitle: "Acciones Inmediatas",
+      title: "Siguientes Pasos",
+      subtitle: "Hitos de Gestión",
       items: [
-        "Presentación a Jucopo",
-        "Protocolo IPP",
-        "Ciencia de Datos",
-        "Lanzamiento SADE"
+        "Validación por Juntas de Coordinación",
+        "Adopción del Protocolo IPP",
+        "Configuración Unidad de Datos",
+        "Auditoría de Procesos Digitales"
       ]
     }
   ];
@@ -327,7 +341,7 @@ const App = () => {
 
   return (
     <div 
-      className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans"
+      className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -336,67 +350,93 @@ const App = () => {
         .preserve-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
       `}</style>
 
-      {/* Header móvil */}
-      <nav className="bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-2">
-          <Rocket className="w-5 h-5 text-emerald-600" />
-          <span className="font-bold text-sm tracking-tight">Estrategia CEFP</span>
+      {/* Header adaptable */}
+      <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+        <div className="flex items-center gap-3">
+          <div className="bg-emerald-600 p-2 rounded-lg text-white">
+            <Rocket className="w-5 h-5" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold text-sm tracking-tight leading-none">Estrategia CEFP</span>
+            <span className="text-[10px] text-slate-400 font-medium">GITHUB DEPLOYMENT</span>
+          </div>
         </div>
-        <button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg"
-        >
-          {isMenuOpen ? <X /> : <Menu />}
-        </button>
+        <div className="flex items-center gap-2">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-slate-900 transition-colors hidden sm:block">
+            <Github className="w-5 h-5" />
+          </a>
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 text-slate-600 hover:bg-slate-100 rounded-xl transition-all"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </nav>
 
-      {/* Menú de navegación móvil */}
+      {/* Menú de navegación adaptable */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-white z-40 p-6 pt-20 animate-in fade-in slide-in-from-top-4 duration-300">
-          <h2 className="text-xl font-bold mb-6 border-b pb-2 text-slate-800">Ir a Sección</h2>
-          <div className="grid grid-cols-1 gap-3 overflow-y-auto h-[70vh]">
-            {slides.map((s, i) => (
-              <button
-                key={s.id}
-                onClick={() => { setCurrentSlide(i); setIsMenuOpen(false); }}
-                className={`text-left p-4 rounded-xl border text-sm transition-all ${
-                  i === currentSlide ? 'bg-emerald-600 border-emerald-600 text-white font-bold' : 'bg-slate-50 border-slate-200 text-slate-600'
-                }`}
-              >
-                {i + 1}. {s.title}
-              </button>
-            ))}
+        <div className="fixed inset-0 bg-white z-40 p-6 pt-24 animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="max-w-md mx-auto h-full flex flex-col">
+            <h2 className="text-2xl font-black mb-8 border-b pb-4 text-slate-800 flex items-center gap-2">
+              <Layout className="text-emerald-600" /> Secciones del Plan
+            </h2>
+            <div className="grid grid-cols-1 gap-2 overflow-y-auto no-scrollbar flex-1 pb-20">
+              {slides.map((s, i) => (
+                <button
+                  key={s.id}
+                  onClick={() => { setCurrentSlide(i); setIsMenuOpen(false); }}
+                  className={`text-left p-4 rounded-2xl border transition-all flex items-center gap-4 ${
+                    i === currentSlide ? 'bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-200' : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-emerald-500'
+                  }`}
+                >
+                  <span className={`w-6 h-6 flex items-center justify-center rounded-full text-[10px] font-bold ${i === currentSlide ? 'bg-white/20' : 'bg-slate-200'}`}>
+                    {i + 1}
+                  </span>
+                  <span className="font-semibold text-sm">{s.title}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}
 
-      {/* Diapositiva actual (Scrollable) */}
-      <main className="flex-1 overflow-y-auto px-6 py-8 pb-32">
-        <div key={currentSlide} className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Diapositiva actual */}
+      <main className="flex-1 overflow-y-auto px-6 py-10 pb-36">
+        <div key={currentSlide} className="max-w-lg mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
           
           {/* TIPO HERO */}
           {slide.type === 'hero' && (
-            <div className="text-center pt-10">
-              <div className="mb-6 flex justify-center scale-125">{slide.icon}</div>
-              <span className="text-emerald-600 font-bold tracking-widest uppercase text-xs">{slide.tag}</span>
-              <h1 className="text-3xl font-black mt-3 mb-4 leading-tight">{slide.title}</h1>
-              <h2 className="text-lg text-slate-500 mb-6">{slide.subtitle}</h2>
-              <p className="text-slate-600 text-sm leading-relaxed">{slide.description}</p>
+            <div className="text-center pt-6">
+              <div className="mb-8 flex justify-center transform scale-150 animate-bounce duration-[3000ms]">
+                {slide.icon}
+              </div>
+              <span className="bg-emerald-100 text-emerald-700 px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-widest">
+                {slide.tag}
+              </span>
+              <h1 className="text-4xl font-black mt-6 mb-4 leading-tight tracking-tight text-slate-900">{slide.title}</h1>
+              <h2 className="text-xl text-slate-500 mb-8 font-medium leading-relaxed">{slide.subtitle}</h2>
+              <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm text-slate-600 text-sm leading-relaxed">
+                {slide.description}
+              </div>
             </div>
           )}
 
           {/* TIPO LISTA */}
           {slide.type === 'list' && (
             <div>
-              <h1 className="text-2xl font-black mb-1">{slide.title}</h1>
-              <p className="text-slate-500 mb-6 border-b pb-2 text-sm">{slide.subtitle}</p>
+              <div className="mb-8">
+                <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-none mb-2">{slide.title}</h1>
+                <p className="text-slate-400 font-medium text-sm">{slide.subtitle}</p>
+              </div>
               <div className="space-y-3">
                 {slide.items.map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200">
-                    <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">{i+1}</div>
-                    <span className="text-sm font-semibold text-slate-700">{item}</span>
+                  <div key={i} className="flex items-center gap-4 p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-emerald-500 transition-all active:scale-[0.98]">
+                    <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs">{i+1}</div>
+                    <span className="text-sm font-bold text-slate-700">{item}</span>
                   </div>
                 ))}
               </div>
@@ -406,13 +446,15 @@ const App = () => {
           {/* TIPO CONTENIDO / GRIDS FLIP */}
           {slide.type === 'content' && (
             <div>
-              <h1 className="text-2xl font-black">{slide.title}</h1>
-              <p className="text-slate-500 mb-6 text-sm">{slide.subtitle}</p>
+              <div className="mb-8">
+                <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-none mb-2">{slide.title}</h1>
+                <p className="text-slate-400 font-medium text-sm">{slide.subtitle}</p>
+              </div>
               <div className="grid grid-cols-1 gap-2">
                 {slide.content.map((item, i) => (
                   <FlipCard 
                     key={i} 
-                    icon={React.cloneElement(item.icon, { className: "w-6 h-6" })} 
+                    icon={item.icon} 
                     label={item.label} 
                     text={item.text} 
                     summary={item.summary} 
@@ -424,26 +466,38 @@ const App = () => {
 
           {/* TIPO MÉTRICA */}
           {slide.type === 'metric' && (
-            <div className="text-center pt-8">
-              <h1 className="text-2xl font-bold mb-1">{slide.title}</h1>
-              <p className="text-slate-500 mb-10 text-sm">{slide.subtitle}</p>
-              <div className="inline-block bg-white p-12 rounded-full shadow-lg border-2 border-slate-50">
-                <div className={`text-6xl font-black ${slide.color}`}>{slide.metric}</div>
+            <div className="text-center pt-4">
+              <h1 className="text-3xl font-black mb-1 text-slate-900">{slide.title}</h1>
+              <p className="text-slate-400 mb-12 text-sm font-medium">{slide.subtitle}</p>
+              <div className="relative inline-block">
+                <div className="absolute inset-0 bg-emerald-100 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+                <div className="relative bg-white w-48 h-48 rounded-full shadow-2xl border-8 border-slate-50 flex items-center justify-center">
+                  <div className={`text-5xl font-black tracking-tighter ${slide.color}`}>{slide.metric}</div>
+                </div>
               </div>
-              <p className="mt-8 text-sm text-slate-600 leading-relaxed font-medium">{slide.desc}</p>
+              <div className="mt-12 p-8 bg-slate-900 rounded-[2.5rem] text-white shadow-xl">
+                <p className="text-sm font-medium leading-relaxed opacity-90">{slide.desc}</p>
+                <div className="mt-4 flex justify-center gap-1">
+                  <div className="w-1 h-1 bg-emerald-500 rounded-full"></div>
+                  <div className="w-4 h-1 bg-emerald-500 rounded-full"></div>
+                  <div className="w-1 h-1 bg-emerald-500 rounded-full"></div>
+                </div>
+              </div>
             </div>
           )}
 
           {/* TIPO PILARES */}
           {slide.type === 'pillars' && (
             <div>
-              <h1 className="text-2xl font-black">{slide.title}</h1>
-              <p className="text-slate-500 mb-6 text-sm">{slide.subtitle}</p>
-              <div className="grid grid-cols-1 gap-2">
+              <div className="mb-8 text-center">
+                <h1 className="text-3xl font-black text-slate-900">{slide.title}</h1>
+                <p className="text-slate-400 font-medium text-sm">{slide.subtitle}</p>
+              </div>
+              <div className="grid grid-cols-1 gap-3">
                 {slide.items.map((item, i) => (
                   <FlipCard 
                     key={i} 
-                    icon={<CheckCircle2 className="text-emerald-600 w-6 h-6" />} 
+                    icon={<Target className="text-emerald-600 w-8 h-8" />} 
                     label={item.title} 
                     text={item.desc} 
                     summary={item.summary} 
@@ -456,15 +510,15 @@ const App = () => {
           {/* TIPO ROADMAP */}
           {slide.type === 'roadmap' && (
             <div>
-              <div className="flex items-end justify-between mb-8">
-                <h1 className="text-2xl font-black">{slide.title}</h1>
-                <div className={`${slide.color} text-white px-3 py-1 rounded-full font-bold text-[10px]`}>FASE</div>
+              <div className="flex items-center justify-between mb-10">
+                <h1 className="text-3xl font-black text-slate-900">{slide.title}</h1>
+                <div className={`${slide.color} text-white px-4 py-1.5 rounded-full font-black text-[10px] tracking-widest shadow-lg shadow-emerald-100 uppercase`}>FASE</div>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-4 relative before:absolute before:inset-0 before:ml-4 before:w-0.5 before:bg-slate-200">
                 {slide.items.map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200">
-                    <div className={`w-8 h-8 rounded-full ${slide.color} text-white flex items-center justify-center font-bold text-xs flex-shrink-0`}>{i+1}</div>
-                    <p className="text-xs font-semibold text-slate-700">{item}</p>
+                  <div key={i} className="flex items-center gap-6 p-6 rounded-3xl bg-white border border-slate-100 shadow-sm relative z-10 hover:border-emerald-500 transition-all">
+                    <div className={`w-8 h-8 rounded-xl ${slide.color} text-white flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-lg`}>{i+1}</div>
+                    <p className="text-sm font-bold text-slate-700 leading-snug">{item}</p>
                   </div>
                 ))}
               </div>
@@ -473,18 +527,25 @@ const App = () => {
 
           {/* TIPO SPLIT */}
           {slide.type === 'split' && (
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div className="text-center">
-                <h1 className="text-2xl font-black">{slide.title}</h1>
-                <p className="text-sm text-slate-500">{slide.subtitle}</p>
+                <h1 className="text-3xl font-black text-slate-900 mb-2">{slide.title}</h1>
+                <p className="text-sm text-slate-400 font-medium">{slide.subtitle}</p>
               </div>
-              <div className="bg-red-50 p-6 rounded-2xl border border-red-100">
-                <h3 className="text-lg font-bold text-red-700 mb-2">{slide.left.title}</h3>
-                <p className="text-xs text-red-900/70 leading-relaxed">{slide.left.desc}</p>
+              <div className="bg-white p-8 rounded-[2.5rem] border border-red-50 shadow-sm">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                  <h3 className="text-lg font-black text-red-700">{slide.left.title}</h3>
+                </div>
+                <p className="text-sm text-slate-500 leading-relaxed italic">{slide.left.desc}</p>
               </div>
-              <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100">
-                <h3 className="text-lg font-bold text-emerald-700 mb-2">{slide.right.title}</h3>
-                <p className="text-xs text-emerald-900/70 leading-relaxed">{slide.right.desc}</p>
+              <div className="bg-emerald-600 p-8 rounded-[2.5rem] text-white shadow-xl shadow-emerald-100 relative overflow-hidden">
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-emerald-300"></div>
+                  <h3 className="text-lg font-black">{slide.right.title}</h3>
+                </div>
+                <p className="text-sm text-emerald-50 leading-relaxed font-medium">{slide.right.desc}</p>
               </div>
             </div>
           )}
@@ -492,31 +553,34 @@ const App = () => {
         </div>
       </main>
 
-      {/* Barra de Navegación Inferior (PWA Style) */}
-      <footer className="fixed bottom-0 w-full bg-white/90 backdrop-blur-md border-t border-slate-200 px-6 py-4 flex items-center justify-between z-50">
+      {/* Barra de Navegación Inferior (PWA/Mobile optimized) */}
+      <footer className="fixed bottom-0 w-full bg-white/80 backdrop-blur-xl border-t border-slate-200 px-8 py-6 flex items-center justify-between z-50">
         <button 
           onClick={prevSlide}
           disabled={currentSlide === 0}
-          className="p-3 rounded-xl bg-slate-100 text-slate-600 disabled:opacity-20 active:scale-95 transition-transform"
+          className="p-4 rounded-2xl bg-slate-50 text-slate-600 disabled:opacity-20 active:scale-90 transition-all hover:bg-slate-100 shadow-sm border border-slate-100"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
 
-        <div className="flex flex-col items-center">
-          <div className="flex gap-1.5 mb-1">
-            <div className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
-            <div className="h-1.5 w-1.5 rounded-full bg-slate-200" />
-            <div className="h-1.5 w-1.5 rounded-full bg-slate-200" />
+        <div className="flex flex-col items-center gap-2">
+          <div className="flex gap-1.5 px-3 py-1 bg-slate-100 rounded-full">
+            {slides.map((_, i) => (
+              <div 
+                key={i}
+                className={`h-1.5 transition-all duration-300 rounded-full ${i === currentSlide ? 'bg-emerald-600 w-4' : 'bg-slate-300 w-1.5'}`} 
+              />
+            ))}
           </div>
-          <span className="text-[10px] font-bold text-slate-400 uppercase">Slide {currentSlide + 1} / {slides.length}</span>
+          <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{currentSlide + 1} de {slides.length}</span>
         </div>
 
         <button 
           onClick={nextSlide}
           disabled={currentSlide === slides.length - 1}
-          className="p-3 rounded-xl bg-emerald-600 text-white shadow-lg shadow-emerald-200 disabled:opacity-20 active:scale-95 transition-transform"
+          className="p-4 rounded-2xl bg-emerald-600 text-white shadow-xl shadow-emerald-200 disabled:opacity-20 active:scale-90 transition-all hover:bg-emerald-500 border border-emerald-400/20"
         >
-          <ChevronRight className="w-6 h-6" />
+          {currentSlide === slides.length - 1 ? <ExternalLink className="w-6 h-6" /> : <ChevronRight className="w-6 h-6" />}
         </button>
       </footer>
     </div>
